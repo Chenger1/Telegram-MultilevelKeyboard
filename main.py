@@ -37,28 +37,28 @@ async def some_list(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(Text(equals=['Some details']))
-async def some_list(message: types.Message, state: FSMContext):
+async def some_list_2(message: types.Message, state: FSMContext):
     keyboard, path = await dispatcher('LEVEL_2_DETAIL')
     await message.answer('Menu - level 2 details', reply_markup=keyboard)
     await state.update_data(path=path)
 
 
 @dp.message_handler(Text(equals=['Filter list']))
-async def some_list(message: types.Message, state: FSMContext):
+async def some_list_3(message: types.Message, state: FSMContext):
     keyboard, path = await dispatcher('LEVEL_3_FILTER')
     await message.answer('Menu - level 3 - filtered', reply_markup=keyboard)
     await state.update_data(path=path)
 
 
 @dp.message_handler(Text(equals=['Open more details']))
-async def some_list(message: types.Message, state: FSMContext):
+async def some_list_4(message: types.Message, state: FSMContext):
     keyboard, path = await dispatcher('LEVEL_3_DETAIL')
     await message.answer('Menu - level 3 - more details', reply_markup=keyboard)
     await state.update_data(path=path)
 
 
 @dp.message_handler(Text(equals=['Open my list']))
-async def some_list(message: types.Message, state: FSMContext):
+async def some_list_5(message: types.Message, state: FSMContext):
     keyboard, path = await dispatcher('LEVEL_3_MY_LIST')
     await message.answer('Menu - level 3 - my list', reply_markup=keyboard)
     await state.update_data(path=path)
