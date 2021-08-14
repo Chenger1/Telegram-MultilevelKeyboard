@@ -11,7 +11,7 @@ If you want to test it:
 Keyboard can be either regular ReplyKeyboardMarkup or function(coroutine). For example, if we want to have different keyboard for different user groups. We can pass user_id or status to
 dispatcher and make all neccessary checks. 
 
-Look to this project for more advanced example of using this idea: https://github.com/Chenger1/SwipeTelegramBot/blob/main/keyboards/default/dispatcher.py
+Look at this project for more advanced example of using this idea: https://github.com/Chenger1/SwipeTelegramBot/blob/main/keyboards/default/dispatcher.py
 
 Repository opens for proposals.
 I know that algorithm  can be improved, so welcome
