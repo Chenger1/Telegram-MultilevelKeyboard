@@ -18,7 +18,7 @@ menu_storage = {
 
 
 async def dispatcher(level: str) -> tuple[keyboards.ReplyKeyboardMarkup, str]:
-    """ Return right keyboard for each level
+    """ Returns right keyboard for each level
         You can modify it in different pusposes.
         For example if you want to have several user groups
         You can get user_id as parameter and checks his group, etc.
@@ -30,11 +30,11 @@ async def dispatcher(level: str) -> tuple[keyboards.ReplyKeyboardMarkup, str]:
 async def find_in_dict(level: str, storage: dict, path: str = '') -> tuple[keyboards.ReplyKeyboardMarkup, str]:
     """
     RECURSIVE function
-    Iterates over storage. If key == level - return this callable (coroutine)
+    Iterates over storage. If key == level - return level`s keyboard
     If not and value is dict - pass it to recursion function. Dictionary is a sublevel.
     So, we run recursive coroutine and pass - level, THIS KEY`S VALUE - that is i mean sublevel
     And current path.
-    If this coroutine returns result - return it on top. Other wire continue iteration
+    If this coroutine returns result - return it on top. Otherwise continue iteration
     :param level: Level we want to reach
     :param storage: menu_storage
     :param path: path for current level from top of the menu_storage. Uses in back_button
