@@ -1,6 +1,4 @@
 # Telegram-MultilevelKeyboard
-Library - aiogram. Multilevel keyboard with default buttons. NOT inline
-
 Example of creating multilevel keyboard with default buttons- not inline
 
 The main idea is to put menu levels to dictionary, iterate over it to find particular level - and return matched keyboard.
