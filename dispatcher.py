@@ -19,7 +19,7 @@ menu_storage = {
 
 async def dispatcher(level: str) -> tuple[keyboards.ReplyKeyboardMarkup, str]:
     """ Returns right keyboard for each level
-        You can modify it in different pusposes.
+        You can modify it in different purposes.
         For example if you want to have several user groups
         You can get user_id as parameter and checks his group, etc.
     """
