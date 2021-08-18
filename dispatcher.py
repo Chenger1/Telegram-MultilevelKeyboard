@@ -47,7 +47,6 @@ async def find_in_dict(level: str, storage: dict, prev_level: str = 'LEVEL_1') \
         if key == level:
             return value, prev_level.split(':')[0]
         if isinstance(value, dict):
-            result: Optional[tuple[keyboards.ReplyKeyboardMarkup, str]] = await find_in_dict(level, value, key)
+            result = await find_in_dict(level, value, key)
             if result:
-                return result[0], result[1].split(':')[0]
-                #  level in format 'LEVEL_1:LEVEL_2' split by ':' to get 'LEVEL_1' value
+                return result
