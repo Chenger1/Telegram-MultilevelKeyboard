@@ -17,56 +17,56 @@ dp = Dispatcher(bot, storage=storage)
 @dp.message_handler(Text(equals=['Back']))
 async def back(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        if data.get('path'):
-            keyboard, path = await dispatcher(data['path'])
+        if data.get('prev_level'):
+            keyboard, prev_level = await dispatcher(data['prev_level'])
             message_text = 'Back to previous level'
         else:
-            keyboard, path = await dispatcher('LEVEL_1')
+            keyboard, prev_level = await dispatcher('LEVEL_1')
             message_text = 'Main menu'
         await message.answer(message_text, reply_markup=keyboard)
-        data['path'] = path  # ALWAYS save new path to state
+        data['prev_level'] = prev_level  # ALWAYS save new prev_level to state
 
 
 @dp.message_handler(CommandStart())
 async def start_bot(message: types.Message, state: FSMContext):
-    keyboard, path = await dispatcher('LEVEL_1')
+    keyboard, prev_level = await dispatcher('LEVEL_1')
     await message.answer('Hello', reply_markup=keyboard)
-    await state.update_data(path=path)
+    await state.update_data(prev_level=prev_level)
 
 
 @dp.message_handler(Text(equals=['Some list']))
 async def some_list(message: types.Message, state: FSMContext):
-    keyboard, path = await dispatcher('LEVEL_2_LIST')
+    keyboard, prev_level = await dispatcher('LEVEL_2_LIST')
     await message.answer('Menu - level 2 lists', reply_markup=keyboard)
-    await state.update_data(path=path)
+    await state.update_data(prev_level=prev_level)
 
 
 @dp.message_handler(Text(equals=['Some details']))
 async def some_list_2(message: types.Message, state: FSMContext):
-    keyboard, path = await dispatcher('LEVEL_2_DETAIL')
+    keyboard, prev_level = await dispatcher('LEVEL_2_DETAIL')
     await message.answer('Menu - level 2 details', reply_markup=keyboard)
-    await state.update_data(path=path)
+    await state.update_data(prev_level=prev_level)
 
 
 @dp.message_handler(Text(equals=['Filter list']))
 async def some_list_3(message: types.Message, state: FSMContext):
-    keyboard, path = await dispatcher('LEVEL_3_FILTER')
+    keyboard, prev_level = await dispatcher('LEVEL_3_FILTER')
     await message.answer('Menu - level 3 - filtered', reply_markup=keyboard)
-    await state.update_data(path=path)
+    await state.update_data(prev_level=prev_level)
 
 
 @dp.message_handler(Text(equals=['Open more details']))
 async def some_list_4(message: types.Message, state: FSMContext):
-    keyboard, path = await dispatcher('LEVEL_3_DETAIL')
+    keyboard, prev_level = await dispatcher('LEVEL_3_DETAIL')
     await message.answer('Menu - level 3 - more details', reply_markup=keyboard)
-    await state.update_data(path=path)
+    await state.update_data(prev_level=prev_level)
 
 
 @dp.message_handler(Text(equals=['Open my list']))
 async def some_list_5(message: types.Message, state: FSMContext):
-    keyboard, path = await dispatcher('LEVEL_3_MY_LIST')
+    keyboard, prev_level = await dispatcher('LEVEL_3_MY_LIST')
     await message.answer('Menu - level 3 - my list', reply_markup=keyboard)
-    await state.update_data(path=path)
+    await state.update_data(prev_level=prev_level)
 
 
 async def on_shutdown(dp):
