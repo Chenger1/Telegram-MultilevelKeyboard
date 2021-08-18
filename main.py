@@ -17,8 +17,13 @@ dp = Dispatcher(bot, storage=storage)
 @dp.message_handler(Text(equals=['Back']))
 async def back(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        keyboard, path = await dispatcher(data['path'])
-        await message.answer('Back to previous level', reply_markup=keyboard)
+        if data.get('path'):
+            keyboard, path = await dispatcher(data['path'])
+            message_text = 'Back to previous level'
+        else:
+            keyboard, path = await dispatcher('LEVEL_1')
+            message_text = 'Main menu'
+        await message.answer(message_text, reply_markup=keyboard)
         data['path'] = path  # ALWAYS save new path to state
 
 
