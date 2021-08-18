@@ -46,7 +46,7 @@ async def find_in_dict(level: str, storage: dict, prev_level: str = 'LEVEL_1') \
 
     for key, value in storage.items():
         if key == level:
-            return value, prev_level.split(':')[0]
+            return value, prev_level.split(':')[0]  # for example: 'LEVEL_1:LEVEL_2' split by ':' to get 'LEVEL_1'
         if isinstance(value, dict):
             result = await find_in_dict(level, value, key)
             if result:
