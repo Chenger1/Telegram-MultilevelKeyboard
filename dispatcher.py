@@ -3,6 +3,7 @@ from typing import Optional
 import keyboards
 
 
+#  We cant store levels in 'flat' dict. Because in this case it would much harder to implement SINGLE 'Back' button
 menu_storage = {
     'LEVEL_1': keyboards.level_1,
     'LEVEL_1:LEVEL_2': {
