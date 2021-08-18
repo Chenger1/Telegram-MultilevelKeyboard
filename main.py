@@ -9,7 +9,9 @@ from config import Token
 from dispatcher import dispatcher
 
 
-storage = MemoryStorage()
+storage = MemoryStorage()  # User RedisStorage in production
+#  Because MemoryStorage flush all data after reboot and ['prev_level'] keys will be deleted
+# So user wont be able to manage keyboard
 bot = Bot(token=Token, parse_mode='HTML')
 dp = Dispatcher(bot, storage=storage)
 
@@ -17,12 +19,8 @@ dp = Dispatcher(bot, storage=storage)
 @dp.message_handler(Text(equals=['Back']))
 async def back(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        if data.get('prev_level'):
-            keyboard, prev_level = await dispatcher(data['prev_level'])
-            message_text = 'Back to previous level'
-        else:
-            keyboard, prev_level = await dispatcher('LEVEL_1')
-            message_text = 'Main menu'
+        keyboard, prev_level = await dispatcher(data.get('prev_level', 'LEVEL_1'))
+        message_text = 'Back to previous level'
         await message.answer(message_text, reply_markup=keyboard)
         data['prev_level'] = prev_level  # ALWAYS save new prev_level to state
 
