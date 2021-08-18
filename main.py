@@ -6,7 +6,7 @@ from aiogram.dispatcher.filters import CommandStart, Text
 
 from config import Token
 
-from dispatcher import dispatcher, back_button
+from dispatcher import dispatcher
 
 
 storage = MemoryStorage()
@@ -17,7 +17,7 @@ dp = Dispatcher(bot, storage=storage)
 @dp.message_handler(Text(equals=['Back']))
 async def back(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        keyboard, path = await back_button(data['path'])
+        keyboard, path = await dispatcher(data['path'])
         await message.answer('Back to previous level', reply_markup=keyboard)
         data['path'] = path  # ALWAYS save new path to state
 
